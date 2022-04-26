@@ -4,7 +4,7 @@ puppeteer.use(StealthPlugin())
 
 let State = {
     pending: false
-}
+} 
 let MESS_PA = `https://www.facebook.com/messages/t/100007409469662`;
 let GROUP_CHAT = 'https://www.facebook.com/messages/t/4946971555356821';
 let LONG_PHON = "https://www.facebook.com/messages/t/2345111842273989";

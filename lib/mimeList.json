@@ -1,0 +1,10 @@
+{
+    "sheet": "application/vnd.google-apps.spreadsheet",
+    "doc": "application/vnd.google-apps.document",
+    "drawing": "application/vnd.google-apps.drawing",
+    "folder": "application/vnd.google-apps.folder",
+    "forms": "application/vnd.google-apps.form",
+    "slides": "application/vnd.google-apps.presentation",
+    "photo": "application/vnd.google-apps.photo",
+    "drive_file": "application/vnd.google-apps.file"
+}

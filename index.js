@@ -1,29 +1,14 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+const {getRandomFile} = require('./util/dir.js');
+const {Sheet, Drive} = require('./util/botLogic/driveAPI/drive.js');
 puppeteer.use(StealthPlugin())
 
 let State = {
     pending: false
 } 
-let MESS_PA = `https://www.facebook.com/messages/t/100007409469662`;
-let GROUP_CHAT = 'https://www.facebook.com/messages/t/4946971555356821';
-let LONG_PHON = "https://www.facebook.com/messages/t/2345111842273989";
 (async () => {
-  const browser = await puppeteer.launch({headless: true, args: [
-    "--disable-notifications"
-  ]});
-  const page = await browser.newPage();
-  // await page.authenticate({'username':'checker', 'password': 'checker'});
-  await page.goto(LONG_PHON);
-  await page.waitForSelector('#email');
-  await page.waitForTimeout(200)
-  await page.click('#email')
-  await page.type('#email', 'phananhchssbun@gmail.com', {delay: 20})
-  await page.waitForTimeout(400)
-  await page.click('#pass')
-  await page.type('#pass', 'tran19092000', {delay: 30})
-  await page.waitForTimeout(100)
-  await page.keyboard.press('Enter')
+
   // const [button] = await page.$x("//button[contains(., 'Log In')]");
   // if (button) {
   //   await button.click();
@@ -48,9 +33,9 @@ let LONG_PHON = "https://www.facebook.com/messages/t/2345111842273989";
 			let senderName = children.textContent
 			return [text, senderName]
       })
-	  let parsedText = text.split(" ")
-	if(text.includes("@Vu") && senderName!="You sent" && State.pending==false){
+	  if(text.includes("@Vu") && senderName!="You sent" && State.pending==false){
 		State.pending = true
+		let parsedText = text.split(" ")
 		await page.click('p.kvgmc6g5.oygrvhab')
 		let reply = ''
 		if(parsedText[2]){
@@ -59,12 +44,39 @@ let LONG_PHON = "https://www.facebook.com/messages/t/2345111842273989";
 		if(parsedText[1]=="ROAST"){
 			reply += " NGU"
 		}
-		await page.keyboard.type(`Hello ${senderName}, ${reply}`, {delay: 25})
-		await page.waitForTimeout(50)
-		await page.keyboard.press('Enter')
+		if(parsedText[1]=="NEW_SHEET"){
+			let id = await Drive.make.file('sheet', `${senderName}'s File`, "1CCeL88RZsywmd9FVY46Hx3G7S5FK707y")
+			let link = `https://docs.google.com/spreadsheets/d/${id}/edit#gid=0`
+			//update permission
+			await Drive.update.permision()
+			await page.keyboard.type(link, {delay: 0})
+			await page.keyboard.press('Enter')
+		}
+		if(parsedText[1]=="SEND_MUSIC"){
+			const [fileChooser] = await Promise.all([
+				page.waitForFileChooser(),
+				(async() => {
+					await page.evaluate(()=>document.querySelector("div[aria-label='Attach a file']").click())
+				})()	
+			]);
+			await fileChooser.accept(['media/lauv.mp3']);
+		}
+		if(parsedText[1]=="GREET"){
+			let file = await getRandomFile('media/xinh_dep')
+			const [fileChooser] = await Promise.all([
+				page.waitForFileChooser(),
+				(async() => {
+					await page.evaluate(()=>document.querySelector("div[aria-label='Attach a file']").click())
+				})()	
+			]);
+			await fileChooser.accept([`media/xinh_dep/${file}`]);
+		}
+		// await page.keyboard.type(`Hello ${senderName}, ${reply}`, {delay: 25})
+		// await page.waitForTimeout(25)
+		// await page.keyboard.press('Enter')
 		State.pending = false
 	} else {
 		console.log(`${senderName} : ${text} : ${State.pending}\nNo call found`)
 	}
-  }, 1500)
+  }, 1000)
 })();

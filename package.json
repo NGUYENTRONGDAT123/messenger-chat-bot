@@ -15,6 +15,7 @@
     "node-cron": "^3.0.0",
     "puppeteer": "^13.6.0",
     "puppeteer-extra": "^3.2.3",
-    "puppeteer-extra-plugin-stealth": "^2.9.0"
+    "puppeteer-extra-plugin-stealth": "^2.9.0",
+    "uuid4": "^2.0.2"
   }
 }

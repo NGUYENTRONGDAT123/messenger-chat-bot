@@ -1,4 +1,6 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
 const cron = require('./botLogic')
 
 // let MESS_PA = `https://www.facebook.com/messages/t/100007409469662`;

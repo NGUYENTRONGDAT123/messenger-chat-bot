@@ -8,7 +8,6 @@ let stat = {
     PHANH: []
 }
 
-
 function report(page) {
     cron.schedule('0 0 22 * * *', async () => {
         // if(queueTicket()){

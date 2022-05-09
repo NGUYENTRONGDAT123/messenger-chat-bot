@@ -1,6 +1,8 @@
-const {name, stat, queue} = require('./info.js')
-
+const {queue} = require('./global')
+const {queueTicket} = require('../helper')
 //check DOM videos every 1s
+
+
 async function subListenter(page) {
     setInterval(() => {
         let [type, senderName, text, id] = await page.evaluate(() => {
@@ -33,16 +35,21 @@ async function subListenter(page) {
                 text = latest.textContent
                 senderName = children.textContent
             }
-            return [type, senderName, text, id]
+            //if non-exsistant in queue, add to queue
+            if(queueTicket()){
+                queue.push({
+                    type, senderName, text, id
+                })
+            } 
         })
-        let nameID = name[senderName]
+
     
-        if(senderName != "You sent" && senderName != null && !stat[nameID].includes(id)){
-            stat[nameID].push(id)
-            //send mock message
-            await page.click('p.kvgmc6g5.oygrvhab')
-            await page.keyboard.type(`${senderName} đã gửi ${stat[nameID].length} vid`)
-            await page.keyboard.press('Enter')
-        }
-    }, 600)
+        // if(senderName != "You sent" && senderName != null && !stat[nameID].includes(id)){
+        //     stat[nameID].push(id)
+        //     //send mock message
+        //     // await page.click('p.kvgmc6g5.oygrvhab')
+        //     // await page.keyboard.type(`${senderName} đã gửi ${stat[nameID].length} vid`)
+        //     // await page.keyboard.press('Enter')
+        // }
+    }, 500)
 }

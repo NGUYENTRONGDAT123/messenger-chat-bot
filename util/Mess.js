@@ -20,8 +20,6 @@ const Mess = {
         const page = await browser.newPage();
         await page.goto(WORK_OUT);
         await page.waitForSelector('#email');
-        await page.waitForTimeout(100)
-        await page.click('#email')
         await page.type('#email', USERNAME)
         await page.waitForTimeout(50)
         await page.type('#pass', PASSWORD)
@@ -40,19 +38,20 @@ const Mess = {
         this.page = page
         // return this.page
         return 'Logged in'
-    },
-    async getUserInfo(){
-        let [username, userID] = await page.evaluate(() => {
-            let div = document.querySelectorAll("div[role='none'][dir='auto']")
-            let latest = div[div.length - 1]
-            //query parents element from messages
-            let parent = latest.closest("div[role='gridcell']")
-            let children = parent.querySelector("h4")
-            let text = latest.textContent
-            let senderName = children.textContent
-            return [text, senderName]
-        })
     }
+    // ,
+    // async getUserInfo(){
+    //     let [username, userID] = await page.evaluate(() => {
+    //         let div = document.querySelectorAll("div[role='none'][dir='auto']")
+    //         let latest = div[div.length - 1]
+    //         //query parents element from messages
+    //         let parent = latest.closest("div[role='gridcell']")
+    //         let children = parent.querySelector("h4")
+    //         let text = latest.textContent
+    //         let senderName = children.textContent
+    //         return [text, senderName]
+    //     })
+    // }
 }
 
 module.exports = Mess

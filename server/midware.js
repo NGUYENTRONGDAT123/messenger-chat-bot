@@ -3,8 +3,7 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 const PORT = process.env.PORT || 5000;
-const axios = require('axios');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 //init Express Server
 function initServer(){
@@ -13,10 +12,13 @@ function initServer(){
     app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(cors({
-        origin: [origin_site, 'http://localhost:5000']
+        origin: ['http://localhost:5000']
     }));
     app.listen(PORT, () => {
         console.log(`server running on port: ${PORT}`);
     });
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, '../public/index.html'));
+    })
 }
 module.exports = initServer;

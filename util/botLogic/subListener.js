@@ -2,9 +2,8 @@ const {queue} = require('./global')
 const {queueTicket} = require('../helper')
 //check DOM videos every 1s
 
-
 async function subListenter(page) {
-    setInterval(() => {
+    setInterval(async () => {
         let [type, senderName, text, id] = await page.evaluate(() => {
             let type = 'text', senderName, text, id
             let subs = document.querySelectorAll("video")
@@ -53,3 +52,5 @@ async function subListenter(page) {
         // }
     }, 500)
 }
+
+module.exports = subListenter

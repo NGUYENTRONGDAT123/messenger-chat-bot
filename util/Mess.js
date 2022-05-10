@@ -31,15 +31,15 @@ const Mess = {
         await page.waitForSelector('p.kvgmc6g5.oygrvhab', {visible: true});
         await page.click('p.kvgmc6g5.oygrvhab')
         //Bot functions settings
-        if(option.cron)     await cron(
-            page
-            // ,option
-        )
+        // if(option.cron)     await cron(
+        //     page
+        //     // ,option
+        // )
         // if(option.driveAPI) await driveAPI(page, option)
         // if(option.music)    await music(page, option)
         // if(option.joke)     await joke(page, option)
         this.page = page
-        // return this.page 
+        return this.page
     },
     async getUserInfo(){
         let [username, userID] = await page.evaluate(() => {

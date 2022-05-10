@@ -1,4 +1,3 @@
-const State = require('../index.js')
 //resolve queueing
 function queueTicket() {
     if(State.queue){

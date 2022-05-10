@@ -1,6 +1,4 @@
 
-
-
 let queue = []
 
-module.exports = {name, stat, queue}
+module.exports = {queue}

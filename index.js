@@ -3,6 +3,9 @@ const Mess = require('./util/Mess.js')
 
 //global page object
 // let page
+Promise.all([]).then(() => {
+
+})
 (async () => {
 	await Mess.LogIn({
 		cron: true,

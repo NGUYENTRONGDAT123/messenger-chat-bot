@@ -11,7 +11,6 @@ let WORK_OUT= "https://www.facebook.com/messages/t/5066173506798004/"
 let USERNAME = 'phananhchssbun@gmail.com'
 let PASSWORD = 'tran19092000'
 
-
 const Mess = {
     // page: null,
     async LogIn(option){
@@ -39,7 +38,8 @@ const Mess = {
         // if(option.music)    await music(page, option)
         // if(option.joke)     await joke(page, option)
         this.page = page
-        return this.page
+        // return this.page
+        return 'Logged in'
     },
     async getUserInfo(){
         let [username, userID] = await page.evaluate(() => {

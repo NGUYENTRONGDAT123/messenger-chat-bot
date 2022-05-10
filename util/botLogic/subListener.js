@@ -41,7 +41,6 @@ async function subListenter(page) {
                 })
             } 
         })
-
     
         // if(senderName != "You sent" && senderName != null && !stat[nameID].includes(id)){
         //     stat[nameID].push(id)
